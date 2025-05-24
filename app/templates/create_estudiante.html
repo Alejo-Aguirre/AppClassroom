@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Registro de Estudiante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .form-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .password-toggle {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+{% extends "header.html" %}
+
+{% block title %}Inicio - ClassroomApp{% endblock %}
+
+{% block content %}
+    <!-- Contenido principal -->
+    <div class="container py-5">
+        <!-- ALERTAS FLASH -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="mb-4">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0"><i class="bi bi-person-plus me-2"></i>Registro de Nuevo Estudiante</h4>
+                            <a href="{{ url_for('estudiante.lista_estudiantes') }}" class="btn btn-sm btn-light">
+                                <i class="bi bi-arrow-left me-1"></i>Volver
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <h3>¡Bienvenido a ClassroomApp!</h3>
+                            <p class="text-muted">Completa el siguiente formulario para registrarte como estudiante</p>
+                        </div>
+
+                        <form method="POST" action="{{ url_for('estudiante.crear') }}">
+                            <!-- Sección Información Personal -->
+                            <div class="form-section">
+                                <h5 class="form-title"><i class="bi bi-person-fill me-2"></i>Información Personal</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="numero_identificacion" class="form-label">Número de Identificación*</label>
+                                        <input type="text" id="numero_identificacion" name="numero_identificacion" class="form-control" required>
+                                        <small class="text-muted">Documento único de identidad</small>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="text" id="telefono" name="telefono" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="nombre" class="form-label">Nombre*</label>
+                                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="apellido" class="form-label">Apellido*</label>
+                                        <input type="text" id="apellido" name="apellido" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Correo Electrónico*</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                    <small class="text-muted">Este será tu correo institucional en la plataforma</small>
+                                </div>
+                            </div>
+
+                            <!-- Sección Información Académica -->
+                            <div class="form-section">
+                                <h5 class="form-title"><i class="bi bi-book me-2"></i>Información Académica</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="nivel_educativo" class="form-label">Nivel Educativo*</label>
+                                        <select id="nivel_educativo" name="nivel_educativo" class="form-select" required>
+                                            <option value="">Seleccione un nivel</option>
+                                            <option value="Primaria">Primaria</option>
+                                            <option value="Secundaria">Secundaria</option>
+                                            <option value="Universidad">Universidad</option>
+                                            <option value="Posgrado">Posgrado</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fecha_ingreso" class="form-label">Fecha de Ingreso</label>
+                                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="institucion_educativa" class="form-label">Institución Educativa</label>
+                                    <input type="text" id="institucion_educativa" name="institucion_educativa" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="carrera_area_estudio" class="form-label">Carrera/Área de Estudio</label>
+                                    <input type="text" id="carrera_area_estudio" name="carrera_area_estudio" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Sección Credenciales -->
+                            <div class="form-section">
+                                <h5 class="form-title"><i class="bi bi-shield-lock me-2"></i>Credenciales de Acceso</h5>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Nombre de Usuario*</label>
+                                    <input type="text" id="username" name="username" class="form-control" required>
+                                    <small class="text-muted">Este será tu identificador único en el sistema</small>
+                                </div>
+                                <div class="mb-3 position-relative">
+                                    <label for="password" class="form-label">Contraseña*</label>
+                                    <input type="password" id="password" name="password" class="form-control" required>
+                                    <i class="bi bi-eye-slash password-toggle" onclick="togglePassword('password')"></i>
+                                    <div class="mt-2">
+                                        <div class="progress" style="height: 5px;">
+                                            <div id="password-strength" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                        </div>
+                                        <small id="password-help" class="text-muted">La contraseña debe tener al menos 8 caracteres</small>
+                                    </div>
+                                </div>
+                                <div class="mb-3 position-relative">
+                                    <label for="confirm_password" class="form-label">Confirmar Contraseña*</label>
+                                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                                    <i class="bi bi-eye-slash password-toggle" onclick="togglePassword('confirm_password')"></i>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="reset" class="btn btn-outline-secondary me-md-2">
+                                    <i class="bi bi-eraser me-1"></i>Limpiar
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-save me-1"></i>Registrar Estudiante
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Función para mostrar/ocultar contraseña
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = field.nextElementSibling;
+            
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            } else {
+                field.type = "password";
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+            }
+        }
+
+        // Validación de fortaleza de contraseña
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.getElementById('password-strength');
+            const helpText = document.getElementById('password-help');
+            
+            // Medir fortaleza (ejemplo simple)
+            let strength = 0;
+            if (password.length >= 8) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+            
+            // Actualizar barra y texto
+            strengthBar.style.width = strength + '%';
+            
+            if (strength < 50) {
+                strengthBar.className = 'progress-bar bg-danger';
+                helpText.textContent = 'Contraseña débil';
+            } else if (strength < 75) {
+                strengthBar.className = 'progress-bar bg-warning';
+                helpText.textContent = 'Contraseña moderada';
+            } else {
+                strengthBar.className = 'progress-bar bg-success';
+                helpText.textContent = 'Contraseña fuerte';
+            }
+        });
+
+        // Validación de coincidencia de contraseñas
+        document.getElementById('confirm_password').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (password !== confirmPassword && confirmPassword.length > 0) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,303 @@
+{% extends "header.html" %}
+
+{% block title %}Inicio - ClassroomApp{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section - Mejorada con fondo degradado -->
+    <div class="row align-items-center my-5 py-5 rounded-3 hero-section">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-4">Transforma tu experiencia educativa</h1>
+            <p class="lead mb-4">La plataforma todo-en-uno para gestión académica, colaboración y seguimiento del aprendizaje.</p>
+            <div class="d-grid gap-2 d-sm-flex">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg px-4 gap-3">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+                </a>
+                <!-- Botón que activa el modal -->
+                <a href="#" class="btn btn-outline-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#registroModal">
+                    <i class="bi bi-person-plus me-2"></i>Registrarse
+                </a>
+                
+                <!-- Modal - Centrado perfectamente -->
+                <div class="modal fade" id="registroModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title">Selecciona tu perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center py-4">
+                        <p class="mb-4">¿Cómo deseas registrarte en nuestra plataforma?</p>
+                        <div class="d-flex flex-column gap-3 mx-auto" style="max-width: 300px;">
+                            <a href="{{ url_for('estudiante.crear') }}" class="btn btn-outline-primary py-3">
+                            <i class="bi bi-person-video2 me-2"></i>Como Estudiante
+                            </a>
+                            <a href="{{ url_for('estudiante.crear') }}" class="btn btn-outline-primary py-3">
+                            <i class="bi bi-person-badge me-2"></i>Como Profesor
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="{{ url_for('static', filename='img/unirse.png') }}" class="img rounded-3" alt="Aula virtual moderna">
+        </div>
+    </div>
+
+    <!-- Stats Counter -->
+    <div class="row my-5 py-3 bg-white rounded-3 shadow-sm text-center">
+        <div class="col-md-3">
+            <h2 class="display-5 text-primary">+5,000</h2>
+            <p class="text-muted">Usuarios activos</p>
+        </div>
+        <div class="col-md-3">
+            <h2 class="display-5 text-primary">+200</h2>
+            <p class="text-muted">Instituciones</p>
+        </div>
+        <div class="col-md-3">
+            <h2 class="display-5 text-primary">+10,000</h2>
+            <p class="text-muted">Cursos creados</p>
+        </div>
+        <div class="col-md-3">
+            <h2 class="display-5 text-primary">24/7</h2>
+            <p class="text-muted">Soporte disponible</p>
+        </div>
+    </div>
+
+    <!-- Features Section - Mejorada con pestañas -->
+    <div class="row my-5">
+        <div class="col-12 text-center mb-5">
+            <h2 class="fw-bold">Potencia tu gestión educativa</h2>
+            <p class="lead text-muted">Descubre todas las funcionalidades diseñadas para simplificar tu trabajo</p>
+        </div>
+        
+        <ul class="nav nav-tabs justify-content-center mb-4" id="featuresTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" role="tab">
+                    <i class="bi bi-people-fill me-2"></i>Estudiantes
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="teachers-tab" data-bs-toggle="tab" data-bs-target="#teachers" type="button" role="tab">
+                    <i class="bi bi-person-badge-fill me-2"></i>Profesores
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses" type="button" role="tab">
+                    <i class="bi bi-journal-bookmark-fill me-2"></i>Cursos
+                </button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="featuresTabContent">
+            <div class="tab-pane fade show active" id="students" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="bi bi-clipboard2-data-fill feature-icon text-primary"></i>
+                                <h4>Registro académico</h4>
+                                <p>Accede a tu historial completo de calificaciones y progreso académico.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="bi bi-calendar-check-fill feature-icon text-primary"></i>
+                                <h4>Organización de tareas</h4>
+                                <p>Recibe notificaciones y gestiona todas tus asignaciones en un solo lugar.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="bi bi-chat-left-text-fill feature-icon text-primary"></i>
+                                <h4>Comunicación directa</h4>
+                                <p>Interactúa fácilmente con profesores y compañeros de clase.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="teachers" role="tabpanel">
+                <!-- Contenido para profesores -->
+            </div>
+            <div class="tab-pane fade" id="courses" role="tabpanel">
+                <!-- Contenido para cursos -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Demo Section -->
+    <div class="row my-5 py-5 align-items-center">
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-4">Descubre cómo funciona</h2>
+            <p class="lead mb-4">Mira nuestro video tutorial para conocer todas las funcionalidades de ClassroomApp.</p>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Configuración inicial</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Gestión de cursos</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Comunicación con estudiantes</li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <div class="ratio ratio-16x9 shadow-lg rounded">
+                <iframe src="https://www.youtube.com/embed/ejemplo" title="Demo ClassroomApp" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials - Mejorado con carrusel -->
+    <div class="row my-5">
+        <div class="col-12">
+            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body p-5 text-center">
+                                <img src="{{ url_for('static', filename='img/testimonio.png') }}" class="rounded-circle mb-4" width="100" alt="Testimonio">
+                                <p class="lead fst-italic mb-4">"ClassroomApp ha simplificado mi gestión docente. Ahora dedico menos tiempo a papeleo y más a enseñar."</p>
+                                <h5 class="mb-1">Prof. Laura González</h5>
+                                <p class="text-muted">Colegio San Miguel</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <!-- Más testimonios -->
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partners/Institutions Section -->
+    <div class="row my-5 py-4">
+        <div class="col-12 text-center mb-4">
+            <h3>Instituciones que confían en nosotros</h3>
+        </div>
+        <div class="col-12">
+            <div class="d-flex flex-wrap justify-content-center align-items-center gap-5">
+                <img src="{{ url_for('static', filename='img/uniquindio.png') }}" class="img-fluid" style="max-height: 50px;" alt="Institución 1">
+                <img src="{{ url_for('static', filename='img/sena.png') }}" class="img-fluid" style="max-height: 50px;" alt="Institución 2">
+                <img src="{{ url_for('static', filename='img/col1.jpg') }}" class="img-fluid" style="max-height: 50px;" alt="Institución 3">
+                <img src="{{ url_for('static', filename='img/col2png.png') }}" class="img-fluid" style="max-height: 50px;" alt="Institución 4">
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="row my-5 py-4 bg-light rounded-3">
+        <div class="col-12 text-center mb-4">
+            <h2 class="fw-bold">Preguntas frecuentes</h2>
+        </div>
+        <div class="col-md-6">
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            ¿Cómo me registro en la plataforma?
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            El registro es sencillo, solo haz clic en "Registrarse" y completa el formulario con tus datos básicos.
+                        </div>
+                    </div>
+                </div>
+                <!-- Más preguntas -->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-0 h-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="mb-3">¿No encuentras tu respuesta?</h3>
+                    <p class="mb-4">Nuestro equipo de soporte está disponible para ayudarte con cualquier consulta.</p>
+                    <a href="#" class="btn btn-outline-primary align-self-start">
+                        <i class="bi bi-envelope-fill me-2"></i>Contactar soporte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final CTA & Social Media -->
+    <div class="row my-5 py-5 text-center">
+        <div class="col-12 mb-4">
+            <h2 class="display-5 fw-bold mb-3">Únete a nuestra comunidad</h2>
+            <p class="lead mb-5">Síguenos en redes sociales y mantente actualizado con las últimas novedades</p>
+            
+            <div class="d-flex justify-content-center gap-3 mb-5">
+                <a href="#" class="social-icon"><i class="bi bi-facebook fs-3"></i></a>
+                <a href="#" class="social-icon"><i class="bi bi-twitter-x fs-3"></i></a>
+                <a href="#" class="social-icon"><i class="bi bi-instagram fs-3"></i></a>
+                <a href="#" class="social-icon"><i class="bi bi-linkedin fs-3"></i></a>
+                <a href="#" class="social-icon"><i class="bi bi-youtube fs-3"></i></a>
+            </div>
+            
+            <a href="{{ url_for('estudiante.crear') }}" class="btn btn-primary btn-lg px-5 py-3">
+                <i class="bi bi-rocket-takeoff me-2"></i>Comenzar ahora
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #f0f7ff 0%, #c2e0ff 100%);
+        border-radius: 15px;
+    }
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #0d6efd;
+    }
+    .social-icon {
+        color: #495057;
+        transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+        color: #0d6efd;
+        transform: translateY(-3px);
+    }
+    .nav-tabs .nav-link {
+        border: none;
+        color: #495057;
+        font-weight: 500;
+    }
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        background: transparent;
+        border-bottom: 3px solid #0d6efd;
+    }
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Inicializar tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    })
+</script>
+{% endblock %}
